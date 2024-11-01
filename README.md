@@ -1,4 +1,4 @@
-# BienessRa-ces-220773
+# BienessRaices-220773
 Proyecto de clase para la unidad 2 de la asignatura de Aplicaciones Web Orientada a Servicios (AWOS) a través de una aplicación WEB arquitectura SOA para el caso de estudio de una empresa de Bienes Raíces (Compra-Venta de Bienes Inmuebles)
 
 ## Descripcion
@@ -10,7 +10,7 @@ Para poder demostrar y aprender la creacion y consumo de Interfaces de Programac
 |---|-----|-------------|-----------|-------|
 |8.|21/10/2024|Nuevo Repositorio del Proyecto implementando .gitignore|1|✅ Finalizada|
 |9.	|22/10/2024|Creacion de una Aplicacion Web usando Express|12|✅Finalizada|
-|10.|23/10/2024|Operaciones Basicas de un API a traves de los verbos HTTP|12|✅ Finalizad|
+|10.|23/10/2024|Operaciones Basicas de un API a traves de los verbos HTTP|12|✅ Finalizada|
 
 ### Autor
 Creado por: **Ailton Artiaga Quiroga** / [@ArtQuir29]
