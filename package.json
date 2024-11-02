@@ -1,0 +1,39 @@
+{
+  "name": "mx.edu.utxj.ti.awos.bienes-raices",
+  "version": "1.0.0",
+  "description": "Proyecto de Clase para la Unidad 2, de la asignatura AWOS Utilizando Node.js",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "./saludar.js",
+    "server":"nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtQuir29/BienessRaices-220773.git"
+  },
+  "keywords": [
+    "MVC",
+    "Express",
+    "Sequelize",
+    "MySQL",
+    "TailwindCSS",
+    "Nodemon",
+    "NodeJS",
+    "PUG",
+    "NodeMailer",
+    "JWT"
+  ],
+  "author": "Ailton Artiaga Quiroga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArtQuir29/BienessRaices-220773/issues"
+  },
+  "homepage": "https://github.com/ArtQuir29/BienessRaices-220773#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
