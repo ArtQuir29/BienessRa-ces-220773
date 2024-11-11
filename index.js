@@ -1,7 +1,7 @@
 const router = express.Router();
 import express from 'express';
-import generalRoutes from './routers/generalRoutes.js'
-import userRoutes from './routers/userRoutes.js'
+import generalRoutes from './routes/generalRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 //const express = require(`express`); // Importar la libreria para crear un servidor web- CommonJS
 
 // Instanciar nuestra aplicación web
@@ -15,10 +15,13 @@ app.set('views','./views')
 app.use(express.static('./public'));
 
 // Configuramos nuestro servidor web 
-const port = 3000;
+const port = 3001;
 app.listen(port, ()=>{
    console.log(`La aplicación ha iniciado en el puerto: ${port}`);
 })
+
+//Carpeta Publica 
+app.use(express.static('public'))
 
 //Routing - Enrutamiento.
 app.use('/',generalRoutes);
@@ -30,5 +33,6 @@ app.get("/",function(req,res){
 })
 app.use('/',generalRoutes)
 app.use('/auth',userRoutes)
+
 export default router;
 
