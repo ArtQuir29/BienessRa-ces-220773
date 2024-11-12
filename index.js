@@ -2,10 +2,25 @@ const router = express.Router();
 import express from 'express';
 import generalRoutes from './routes/generalRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import db from './DB/config.js'
 //const express = require(`express`); // Importar la libreria para crear un servidor web- CommonJS
+
 
 // Instanciar nuestra aplicación web
 const app = express()
+
+//Conexión a la base de datos
+try {
+    await db.authenticate(); //Verifico las credenciales del usuario
+    db.sync(); // Sincroniza las tablas 
+    console.log("Conexión establecida");
+
+}catch (error) {
+    console.log(error)
+}
+
+//Habilitando la lectura de datos del formulario
+app.use(express.urlencoded({ encoded: true }));
 
 //Habilitar PUG
 app.set('view engine','pug');

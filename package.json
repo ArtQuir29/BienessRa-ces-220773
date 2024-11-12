@@ -7,7 +7,7 @@
   "scripts": {
     "start": "./saludar.js",
     "server": "nodemon index.js",
-    "css":"postcss public/css/tailwind.css -o public/css/app.css --watch"
+    "css": "postcss public/css/tailwind.css -o public/css/app.css --watch"
   },
   "repository": {
     "type": "git",
@@ -32,8 +32,11 @@
   },
   "homepage": "https://github.com/ArtQuir29/BienessRaices-220773#readme",
   "dependencies": {
+    "2": "^3.0.0",
     "express": "^4.21.1",
-    "pug": "^3.0.3"
+    "mysql": "^2.18.1",
+    "pug": "^3.0.3",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
