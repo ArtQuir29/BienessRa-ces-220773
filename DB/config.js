@@ -1,5 +1,4 @@
 import Sequelize from 'sequelize'
-import { noBoolOperatorAliases } from 'sequelize/lib/utils/deprecations';
 
 const db=new Sequelize ('BienesRaices_220773','Ailton.Artiaga','pass1234',{
 
@@ -22,4 +21,4 @@ operatorAliases: false
 
 
 });
- export default config;
+ export default db;

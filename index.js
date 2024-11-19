@@ -2,7 +2,7 @@ const router = express.Router();
 import express from 'express';
 import generalRoutes from './routes/generalRoutes.js'
 import userRoutes from './routes/userRoutes.js'
-import db from './DB/config.js'
+import db from './db/config.js'
 //const express = require(`express`); // Importar la libreria para crear un servidor web- CommonJS
 
 
@@ -30,7 +30,7 @@ app.set('views','./views')
 app.use(express.static('./public'));
 
 // Configuramos nuestro servidor web 
-const port = 3001;
+const port = 3002;
 app.listen(port, ()=>{
    console.log(`La aplicación ha iniciado en el puerto: ${port}`);
 })
