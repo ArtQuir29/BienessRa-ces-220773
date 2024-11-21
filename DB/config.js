@@ -1,24 +1,22 @@
 import Sequelize from 'sequelize'
+import dotenv from 'dotenv'
 
-const db=new Sequelize ('BienesRaices_220773','Ailton.Artiaga','pass1234',{
+dotenv.config({path:'.env'})
 
-host:"localhost",
-port:3307,
-dialect:'mysql',
-define:{
-    timestamps:true
-},
-pool:{
-max :5,
-min : 0,
-acquire:30000,
-idle:10000
-},
-
-operatorAliases: false
-
-
-
-
+const db = new Sequelize(process.env.BD_NAME,process.env.BD_USER,process.env.BD_PASS,{
+    host: process.env.BD_DOMAIN,
+    port: process.env.BD_PORT,
+    dialect: 'mysql',
+    defione: {
+        timestamps: true
+    },
+    pool:{
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    },
+    operatorAliases: false
 });
- export default db;
+
+export default db;
