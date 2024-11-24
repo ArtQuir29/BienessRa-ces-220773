@@ -26,13 +26,17 @@ const formularioPasswordRecovery = (req, res) => {
 
 const createNewUser = async (req, res) => {
     // Validación de los campos que se reciben del formulario
-    await check('name').notEmpty().withMessage('El nombre no puede ir vacío').run(req) 
-        .isEmail().withMessage('El correo electrónico no tiene el formato correcto').run(req);
-    await check('password').notEmpty().withMessage('La contraseña es un campo obligatorio')
-        .isLength({ min: 8 }).withMessage('El Password debe ser de al menos 8 caracteres').run(req);
-    await check('confirmPassword').equals(req.body.password).withMessage('La contraseña debe coincidir con la anterior').run(req);
+    await check('name').notEmpty().withMessage('El nombre no puede ir vacío').run(req); 
+    await check('email').isEmail().withMessage('El correo electrónico no tiene el formato correcto').run(req);
+    await check('password')
+        .notEmpty().withMessage('La contraseña es un campo obligatorio')
+        .isLength({ min: 8 }).withMessage('El Password debe ser de al menos 8 caracteres')
+        .run(req);
+    await check('confirmPassword')
+        .equals(req.body.password).withMessage('La contraseña debe coincidir con la anterior')
+        .run(req);
 
-    let resultado = validationResult(req);
+    const resultado = validationResult(req);
 
     // Verificamos si hay errores de validación
     if (!resultado.isEmpty()) {
@@ -79,7 +83,7 @@ const createNewUser = async (req, res) => {
     });
 
     // Mostrar mensaje de confirmación
-    res.render('templates/message', {
+    res.render('templates/message.pug', {
         page: 'Cuenta Creada Correctamente',
         msg: `Hemos enviado un Email de Confirmación a ${email}. Presione en el enlace para confirmar su cuenta.`
     });
@@ -105,7 +109,7 @@ const confirm = async (req, res) => {
     res.render('auth/confirmAccount', {
         page: 'Cuenta Confirmada',
         msg: 'La cuenta se ha confirmado correctamente.',
-        error: false
+        
     });
 };
 
@@ -114,5 +118,5 @@ export {
     formularioRegister,
     formularioPasswordRecovery,
     createNewUser,
-    confirm,
+    confirm, // Cambiar confirmAccount a confirm
 };
