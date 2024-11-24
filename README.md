@@ -12,6 +12,7 @@ Para poder demostrar y aprender la creacion y consumo de Interfaces de Programac
 |9.	|22/10/2024|Creacion de una Aplicacion Web usando Express|12|✅Finalizada|
 |10.|23/10/2024|Operaciones Basicas de un API a traves de los verbos HTTP|12|✅ Finalizada|
 |11.|11/11/2024|Configuracion de views/CSS e Instalacion de Tailwind|13|✅ Finalizada|
+|12.|22/11/2024|Conexion de BD y Envio de correos electronicos para los usuarios|30|✅ Finalizada|
 
 ### Autor
 Creado por: **Ailton Artiaga Quiroga** / [@ArtQuir29]
