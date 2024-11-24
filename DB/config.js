@@ -20,3 +20,6 @@ const db = new Sequelize( process.env.BD_NOMBRE, process.env.BD_USER, process.en
 });
 
 export default db;
+
+
+//COn

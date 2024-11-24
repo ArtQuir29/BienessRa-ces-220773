@@ -46,7 +46,7 @@ app.use('/', generalRoutes);
 app.use('/auth', userRoutes);
 
 // Configuración del servidor
-const port = process.env.BACKEND_PORT || 3000;
+const port = process.env.BACKEND_PORT || 3002;
 app.listen(port, () => {
     console.log(`La aplicación ha iniciado en el puerto: ${port}`);
 });
