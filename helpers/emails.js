@@ -1,86 +1,65 @@
-import nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer'
+import dotenv from 'dotenv'
 
-const registerEmail = async (data) => {
+dotenv.config({path: '.env'})
+
+const emailAfterRegister = async (newUserData) => {
     const transport = nodemailer.createTransport({
-        host: process.env.Email_HOST,
-        port: process.env.Email_PORT,
-        auth: {
-            user: process.env.Email_USER,
-            pass: process.env.Email_PASS,
-        },
-    });
+        host: process.env.EMAIL_HOST, 
+        port: process.env.EMAIL_PORT,
+        auth:{
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        }
+    })
 
-    const { email, name, token } = data;
+    //console.log(data)
+    const {email, name, token} = newUserData
 
-    // Enviar el email
+    //Enviar el email
     await transport.sendMail({
-        from: 'BienesRaices_220773',
+        from: 'bieneracices-matricula.com',
         to: email,
-        subject: 'Confirma tu cuenta...',
-        text: `Estimado ${name}, es necesario que confirme su cuenta para poder acceder.`,
-        html: `
-            <header style="font-family: bold; text-align: center; line-height: 0.5;">
-                <h2>Bienes Raices</h2>
-                <h3>Confirmación de correo</h3>
-            </header>
-            <div style="font-family: sans-serif; text-align: justify; line-height: 1.6; color: #333; background-color: #F8F7FF; padding: 25px; border: 10px solid #FFD8BE; border-radius: 5px;">
-                <h2 style="color: black;">¡Hola, <span style="color: black;">${name}</span>!</h2>
-                <div style="padding: 35px; border: dashed #FFD8BE; border-radius: 30px;">
-                    <p style="font-size: 18px; color:black;">
-                        ¡Gracias por registrarte en <strong>BienesRaices_220773</strong>! Para completar el proceso de confirmación de tu cuenta y acceder a todos nuestros servicios, necesitamos la confirmación de tu correo electrónico.
-                    </p>
-                    <div style="text-align: center; background: #FFD8BE; border: 1px solid #000; padding: 15px;">
-                        <p style="font-size: 20px;">
-                            Haz clic en el botón de abajo para confirmar tu cuenta:
-                        </p>
-                        <div style="text-align: center; margin: 20px 0;">
-                            <a href="${process.env.BACKEND_URL}:${process.env.PORT ?? 3002}/auth/confirm/${token}" 
-                               style="background-color: black; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px;">
-                               Confirmar Cuenta
-                            </a>
-                        </div>
-                    </div>
-                    <p style="font-size: 18px; color: #666;">
-                        Si no reconoces esta solicitud o no creaste la cuenta, puedes ignorar este mensaje. ¡Gracias por elegirnos! Estamos emocionados por poder ayudarte a encontrar la propiedad deseada.
-                    </p>
-                    <div style="text-align: center; line-height: 1.6;">
-                        <p style="font-size: 20px; color: #666;">
-                            Atentamente, <br>
-                            <strong>Ailton Artiaga</strong>
-                        </p>
-                         <div style="margin-bottom: 15px;">
-                            <img src="cid:firma" alt="Firma" style="max-width: 150px; border-radius: 5px;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <footer style="text-align: center;">
-                @Todos los derechos reservados de BienesRaices_220773
-            </footer>
-        `,
-    });
-    
-    
-}    
+        subject: 'Bienvenido/a al BienesRaices-Matricula',
+        text: 'Ya casi puedes usar nuestra plataforma, solo falta...',
+        html: `<p> Hola,  <span style="color: red"> ${name}</span>, <br>
+        Bienvenido a la plataforma de BienesRaíces, el sitio seguro donde podrás buscar, comprar y ofertar propiedades a través de internet.
+        <br>
+        <p>Ya solo necesitamos confirmes la cuenta que creaste, dando click a la siguiente liga:  <a href="${process.env.BACKEND_DOMAIN}:${process.env.BACKEND_PORT}/auth/confirmAccount/${token}">Confrimar cuenta</a></p> 
+        <br>
+        <p>Si tu no has creado la cuenta ignora este mensaje.</p>
+        `
+     })
 
-attachments: [
-    {
-        filename: 'casa.png', 
-        path: './public/assets/casa.png', 
-        cid: 'casa' 
-    },
-    {
-        filename: 'firma.png', 
-        path: './public/assets/firma.png', 
-        cid: 'firma'
-    },
-    {
-        filename: 'tache.png', 
-        path: './public/assets/tache.png', 
-        cid: 'tache'
-    }
-]
+}
 
 
+const emailChangePassword = async (userData) => {
+    const transport = nodemailer.createTransport({
+        host: process.env.EMAIL_HOST, 
+        port: process.env.EMAIL_PORT,
+        auth:{
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        }
+    })
 
-export { registerEmail };
+    //console.log(data)
+    const {email, name, token} = userData
+
+    //Enviar el email
+    await transport.sendMail({
+        from: 'bieneracices-matricula.com',
+        to: email,
+        subject: 'Solicitud de actualización de contraseña en BienesRaíces.com',
+        text: 'Por favor actualiza tu contraseña para ingresar a la plataforma',
+        html: `<p> Hola,  <span style="color: red"> ${name}</span>, <br>
+        Haz reportado el olvido o perdida de tu contraseña para acceder a tu cuenta de BienesRaices.
+        <br>
+        <p>Por lo que necesitamos que  igreses a la siguiente liga para: <a href="${process.env.BACKEND_DOMAIN}:${process.env.BACKEND_PORT}/auth/passwordRecovery/${token}">Actualizar Contraseña</a></p> 
+        <br>`
+     })
+
+}
+
+export {emailAfterRegister, emailChangePassword}
