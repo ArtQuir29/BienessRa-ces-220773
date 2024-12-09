@@ -13,6 +13,7 @@ Para poder demostrar y aprender la creacion y consumo de Interfaces de Programac
 |10.|23/10/2024|Operaciones Basicas de un API a traves de los verbos HTTP|12|✅ Finalizada|
 |11.|11/11/2024|Configuracion de views/CSS e Instalacion de Tailwind|13|✅ Finalizada|
 |12.|22/11/2024|Conexion de BD y Envio de correos electronicos para los usuarios|30|✅ Finalizada|
+|13.|09/12/2024|
 
 ### Autor
 Creado por: **Ailton Artiaga Quiroga** / [@ArtQuir29]
