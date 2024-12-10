@@ -19,25 +19,25 @@ const emailAfterRegister = async (newUserData) => {
      // Enviar el email
    //Enviar el email
    await transport.sendMail({
-    from: 'bieneracices-matricula.com',
+    from: 'BienesRaices_220773',
     to: email,
-    subject: 'Bienvenido/a al BienesRaices-Matricula',
+    subject: 'Bienvenido/a al BienesRaices_220773',
     text: `Hola ${name}, bienvenido/a a la plataforma de Bienes Raíces. Solo necesitamos que confirmes tu cuenta dando click en el siguiente enlace: ${process.env.BACKEND_DOMAIN}:${process.env.BACKEND_PORT}/auth/confirmAccount/${token}. Si no has creado esta cuenta, ignora este mensaje.`,
     html: `
         <div style="background-color: #FFEEDD; padding: 20px; font-family: Arial, sans-serif; border: 1px solid #FFD8BE; border-radius: 5px;">
-            <p style="color: #FF5733; font-size: 18px;">
+            <p style="color: #444; font-size: 18px;">
                 Hola, <span style="font-weight: bold; color: #FF5733;">${name}</span>,
             </p>
             <p style="color: #444; font-size: 16px;">
                 Bienvenido/a a la plataforma de <strong>Bienes Raíces</strong>, el sitio seguro donde podrás buscar, comprar y ofertar propiedades a través de internet.
             </p>
             <p style="color: #444; font-size: 16px;">
-                Ya solo necesitamos que confirmes la cuenta que creaste dando click en el siguiente enlace:
+                Ya solo necesitamos que confirmes la cuenta que creaste dando click en el siguiente botón:
             </p>
-            <p>
+            <p style="text-align: center;">
                 <a href="${process.env.BACKEND_DOMAIN}:${process.env.BACKEND_PORT}/auth/confirmAccount/${token}" 
-                   style="background-color: #FFD8BE; color: #333; text-decoration: none; padding: 10px 15px; border-radius: 5px; font-size: 16px;">
-                    Confirmar cuenta
+                   style="display: inline-block; background-color: #FFD8BE; color: #333; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; font-weight: bold; border: 1px solid #FF5733;">
+                    Confirmar Cuenta
                 </a>
             </p>
             <p style="color: #444; font-size: 16px;">
@@ -45,9 +45,7 @@ const emailAfterRegister = async (newUserData) => {
             </p>
         </div>
     `
-});
- 
-}    
+}); }
 
 
 const emailChangePassword = async (userData) => {
