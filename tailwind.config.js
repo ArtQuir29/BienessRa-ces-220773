@@ -2,7 +2,13 @@
 export default {
   content: ['./views/**/*.pug'],
   theme: {
-    extend: {},
+    extend: {
+
+
+
+
+      
+    },
   },
   plugins: [],
 }
