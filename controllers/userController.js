@@ -6,6 +6,7 @@ import { emailAfterRegister, emailChangePassword } from '../helpers/emails.js'
 const formularioLogin = (request, response) =>   {
         response.render("auth/login", {
             page : "Ingresa a la plataforma",
+            csrfToken: request.csrfToken()
         })
     }
 
@@ -66,8 +67,7 @@ const  createNewUser= async(request, response) =>
         })
         }
              
-        /*console.log("Registrando a un nuevo usuario.")
-        console.log(request.body);*/
+      
 
         //Registramos los datos en la base de datos.
             const newUser = await User.create({
@@ -123,8 +123,7 @@ const  createNewUser= async(request, response) =>
             }
             
             
-            //confirmar cuenta
-            //enviar mensaje
+            
             
 
         }
@@ -186,7 +185,7 @@ const  createNewUser= async(request, response) =>
         response.render('templates/message', {
             csrfToken: request.csrfToken(),
             page: 'Solicitud de actualización de contraseña aceptada',
-            msg: `Hemos enviado un correo a :  ${email} , para la la actualización de tu contraseña.`
+            msg: 'Hemos enviado un correo a : <poner el correo aqui>, para la la actualización de tu contraseña.'
         })
 
 
@@ -251,11 +250,82 @@ const  createNewUser= async(request, response) =>
 
     }
 
+    const userAuthentication =  async(request, response) =>
+        {
+
+            const {correo_usuario:email , pass_usuario:password} = request.body;
+
+            console.log(`El usuario esta intentando acceder con las credenciles usuario: ${email} y la constraseña: ${password}...`)
+
+            // Validar datos desde front
+            await check('correo_usuario').notEmpty().withMessage("El correo electrónico es un campo obligatorio.").isEmail().withMessage("El correo electrónico no tiene el formato de: usuario@dominio.extesion").run(request)
+    
+            await check('pass_usuario').notEmpty().withMessage("La contraseña es un campo obligatorio.").isLength({min:8}).withMessage("La constraseña debe ser de almenos 8 carácteres.").run(request)
+            
+            let result = validationResult(request)
+        
+            //Verificamos si hay errores de validacion
+            if(!result.isEmpty())
+            {
+                return response.render("auth/login", {
+                    page: 'Login',
+                    errors: result.array(),
+                    csrfToken: request.csrfToken()
+                })
+            }   
+
+            // revisar que exista la cuenta
+            const existingUser = await User.findOne({where:{email}})
+            // revisar quee la cuenta y la contraseña coincidan con la bd
+
+            if(!existingUser)
+            {
+                return response.render("auth/login", {
+                    page: 'Login',
+                    csrfToken: request.csrfToken(),
+                    errors: [{msg: `Error, no existe una cuenta asociada a este correo.` }],
+                                    
+                })
+            }
+
+            // Verificar que la cuenta este confirmada
+            
+            if(!existingUser.confirmed)
+            {
+                return response.render("auth/login", {
+                    page: 'Login',
+                    csrfToken: request.csrfToken(),
+                    errors: [{msg: `Por favor revisa tu correo electrónico y confirma tu cuenta.` }],
+                                    
+                })
+            }
+            else{
+
+                if(!existingUser.passwordVerify(password))
+                {
+                    return response.render("auth/login", {
+                        page: 'Login',
+                        csrfToken: request.csrfToken(),
+                        errors: [{msg: `La contraseña es incorrecta.` }],
+                                        
+                    })
+                }
+            }
+
+    
+
+            return 0;
+
+        }
+
+
 export {formularioLogin,
-     formularioRegister,
-      formularioPasswordRecovery,
-       createNewUser, 
-       confirm,
-        passwordReset, 
-        verifyTokenPasswordChange, 
-        updatePassword}
+     formularioRegister, 
+     formularioPasswordRecovery, 
+     createNewUser, 
+     confirm, 
+     passwordReset, 
+     verifyTokenPasswordChange,
+      updatePassword, 
+      userAuthentication
+    }
