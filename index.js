@@ -5,6 +5,7 @@ import db from './db/config.js';
 import dotenv from 'dotenv';
 import csrf from 'csurf';
 import cookieParser from 'cookie-parser';
+import propertyRoutes from './routes/properties.js'
 
 dotenv.config({ path: '.env' });
 
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
 // Routing
 app.use('/', generalRoutes);
 app.use('/auth', userRoutes);
+app.use('/properties', propertyRoutes); // Ruta de propiedades
 
 // Configuración del servidor
 const port = process.env.BACKEND_PORT || 3002;

@@ -1,6 +1,6 @@
 import {check, validationResult} from 'express-validator'
 import User from '../models/User.js'
-import { generatetId } from '../helpers/tokens.js'
+import { generatetId,  generarJWT } from '../helpers/tokens.js'
 import { emailAfterRegister, emailChangePassword } from '../helpers/emails.js' 
 
 const formularioLogin = (request, response) =>   {
@@ -312,14 +312,26 @@ const  createNewUser= async(request, response) =>
                 }
             }
 
-    
+            // Generar el token JWT
+   // Función de autenticación del usuario
+async function userAuthentication(req, res) {
+    // Intentar generar el token JWT
+    const token = generarJWT({ id: User.id, nombre: User.name });
+
+    // Almacenar el token en una cookie
+    return res.cookie('_token', token, {
+        httpOnly: true, // La cookie no será accesible desde JavaScript en el cliente
+    }).redirect('/properties/myProperties'); // Redirige a la página de propiedades
+}
+
 
             return 0;
 
         }
 
 
-export {formularioLogin,
+export {
+    formularioLogin,
      formularioRegister, 
      formularioPasswordRecovery, 
      createNewUser, 

@@ -36,5 +36,10 @@ const User = db.define('tbb_users',{
     }
 })
 
+User.prototype.passwordVerify = function(passwordFrontEnd)
+{
+    return bcrypt.compareSync(passwordFrontEnd, this.password);
+}
+
 
 export default User;
